@@ -1,0 +1,94 @@
+.blog-carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  padding: 10px 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 18px;
+  animation: scroll 38s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+.blog-carousel:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 320px;
+  min-height: 210px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease,
+    background-color 0.22s ease;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 18px 48px rgba(20, 20, 20, 0.12);
+  transform: translateY(-3px);
+}
+
+.blog-card:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(45, 106, 79, 0.12);
+}
+
+.blog-card h3 {
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0 0 10px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  font-family: "DM Serif Display", serif;
+  letter-spacing: -0.01em;
+}
+
+.blog-card p {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.5;
+  max-height: 6.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.blog-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.blog-carousel {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.loading-text {
+  color: var(--muted);
+  margin: 0;
+  padding: 8px 2px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
