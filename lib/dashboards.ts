@@ -90,8 +90,6 @@ function generateDescription(fileName: string): string {
     "cyber fraud db_page-0001.jpg": "Fraud detection patterns and analysis",
     "finance setiment analysis_page-0001.jpg":
       "Sentiment analysis in financial markets",
-    "survival and outcome.png": "Patient survival metrics and outcomes",
-    "treatment and dosage.png": "Treatment regimens and dosage analysis",
   }
 
   // Return custom description if it exists
