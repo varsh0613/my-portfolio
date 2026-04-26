@@ -1,7 +1,7 @@
 services:
   - type: web
     name: varshitha-portfolio
-    env: node
+    runtime: static
     plan: free
-    buildCommand: npm ci && npm run build
-    startCommand: next start -p $PORT
+    buildCommand: npm ci && npm run build:static
+    staticPublishPath: dist
