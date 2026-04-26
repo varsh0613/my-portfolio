@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: varshitha-portfolio
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: next start -p $PORT

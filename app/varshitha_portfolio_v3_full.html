@@ -1,0 +1,809 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400;1,900&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Caveat:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.site{background:#F4EFE4;color:#1C1C1C;font-family:'DM Sans',sans-serif;overflow-x:hidden;position:relative}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(#b0a898 1px,transparent 1px),linear-gradient(90deg,#b0a898 1px,transparent 1px);background-size:32px 32px;opacity:0.13;pointer-events:none;z-index:0}
+.sec{position:relative;z-index:1}
+
+.nav-bar{padding:14px 48px;border-bottom:0.5px solid #d0c8b8;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;background:#F4EFE4}
+.nav-badge{font-family:'Caveat',cursive;font-size:13px;background:#F2C14E;color:#5a3e00;padding:4px 14px;transform:rotate(-2deg);display:inline-block}
+.nav-links{display:flex;gap:20px}
+.nav-links a{font-size:12px;color:#888;text-decoration:none;letter-spacing:0.5px}
+.nav-note{font-family:'Caveat',cursive;font-size:15px;color:#bbb;transform:rotate(-1deg);display:inline-block}
+
+.hero{padding:52px 48px 56px;position:relative;border-bottom:0.5px solid #d0c8b8;text-align:center}
+.hero-inner{position:relative;display:inline-block;text-align:left;width:100%;max-width:1080px}
+.hero-grid{display:grid;grid-template-columns:1.25fr 0.75fr;gap:44px;align-items:start}
+.hero-copy{position:relative}
+.hero-annotation{font-family:'Caveat',cursive;font-size:26px;color:#aaa;position:absolute;top:-44px;right:0px;transform:rotate(-7deg);white-space:nowrap;text-align:right;pointer-events:none}
+.scroll-note{font-family:'Caveat',cursive;font-size:22px;color:#bbb;position:absolute;top:-14px;right:0px;transform:rotate(-4deg);white-space:nowrap;text-align:right;pointer-events:none}
+.arrow-curve{position:absolute;top:0px;right:230px}
+.sirigiri-label{font-family:'Caveat',cursive;font-size:18px;color:#999;letter-spacing:1px;margin-bottom:2px;display:block}
+.hero-name{font-family:'Playfair Display',serif;font-size:86px;font-weight:900;line-height:0.9;color:#1C1C1C;letter-spacing:-3px;margin-bottom:4px}
+.hero-name-italic{font-family:'Playfair Display',serif;font-size:68px;font-weight:400;font-style:italic;line-height:1;color:#555;display:block;margin-bottom:28px}
+.sticker-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;align-items:center}
+.sticker{font-family:'Caveat',cursive;font-size:13px;padding:6px 13px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center}
+.s-amber{background:#F2C14E;color:#5a3e00;transform:rotate(-3deg)}
+.s-blue{background:#B8CDE8;color:#0d2d52;transform:rotate(2deg)}
+.s-coral{background:#E8795A;color:#fff;border-radius:50%;width:68px;height:68px;font-size:11px;text-align:center;transform:rotate(4deg);flex-direction:column;line-height:1.3}
+.s-white{background:#fff;color:#1C1C1C;border:0.5px solid #ccc;transform:rotate(-1deg)}
+.hero-desc{font-size:15px;color:#666;max-width:500px;line-height:1.7;margin-bottom:32px}
+.hero-desc strong{font-weight:500;color:#1C1C1C}
+.btns{display:flex;gap:12px;align-items:center}
+.btn-dark{background:#1C1C1C;color:#F4EFE4;padding:12px 28px;font-size:14px;font-family:'DM Sans',sans-serif;border:none;cursor:pointer}
+.btn-outline{background:transparent;color:#1C1C1C;padding:12px 28px;font-size:14px;font-family:'DM Sans',sans-serif;border:1px solid #999;cursor:pointer}
+.btn-note{font-family:'Caveat',cursive;font-size:16px;color:#bbb;margin-left:8px;display:inline-block;transform:rotate(-3deg)}
+
+/* Polaroid deck (journal feel) */
+.myself-deck{position:relative}
+.myself-stack{position:relative;width:300px;height:380px;margin-left:auto}
+.myself-polaroid{position:absolute;inset:0;display:block;text-decoration:none;color:#1C1C1C;background:#fff;border:0.5px solid #d0c8b8;box-shadow:0 18px 28px rgba(0,0,0,0.16);padding:10px 10px 14px;transform:translate(var(--x, 0px), var(--y, 0px)) rotate(var(--r, -2deg));transition:transform 260ms ease, box-shadow 260ms ease;cursor:pointer}
+.myself-polaroid:hover{box-shadow:0 22px 34px rgba(0,0,0,0.18)}
+.myself-photo{width:100%;height:300px;overflow:hidden;background:#F4EFE4;border:0.5px solid #e6dfd0}
+.myself-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.myself-cap{font-family:'Caveat',cursive;font-size:15px;color:#666;margin-top:10px;display:flex;justify-content:space-between;gap:10px}
+.myself-cap span{white-space:nowrap}
+.myself-tape{width:44px;height:12px;background:#F2C14E;opacity:0.7;position:absolute;top:-4px;left:50%;transform:translateX(-50%) rotate(-2deg)}
+.myself-controls{display:flex;align-items:center;gap:10px;margin-top:14px;justify-content:flex-end}
+.myself-shuffle{background:#1C1C1C;color:#F4EFE4;padding:9px 14px;font-size:12px;font-family:'DM Sans',sans-serif;border:none;cursor:pointer}
+.myself-note{font-family:'Caveat',cursive;font-size:16px;color:#aaa;transform:rotate(-2deg)}
+
+@media (max-width: 980px){
+  .hero-grid{grid-template-columns:1fr;gap:26px}
+  .myself-stack{margin-left:0}
+  .myself-controls{justify-content:flex-start}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .myself-polaroid{transition:none}
+}
+
+.tear-down{width:100%;height:24px;background:#1C1C1C;clip-path:polygon(0 0,1.5% 100%,3% 10%,4.5% 100%,6% 20%,7.5% 100%,9% 5%,10.5% 100%,12% 25%,13.5% 100%,15% 15%,16.5% 100%,18% 30%,19.5% 100%,21% 8%,22.5% 100%,24% 22%,25.5% 100%,27% 12%,28.5% 100%,30% 28%,31.5% 100%,33% 18%,34.5% 100%,36% 5%,37.5% 100%,39% 24%,40.5% 100%,42% 14%,43.5% 100%,45% 30%,46.5% 100%,48% 10%,49.5% 100%,51% 22%,52.5% 100%,54% 16%,55.5% 100%,57% 28%,58.5% 100%,60% 8%,61.5% 100%,63% 20%,64.5% 100%,66% 12%,67.5% 100%,69% 26%,70.5% 100%,72% 6%,73.5% 100%,75% 22%,76.5% 100%,78% 16%,79.5% 100%,81% 30%,82.5% 100%,84% 10%,85.5% 100%,87% 20%,88.5% 100%,90% 14%,91.5% 100%,93% 28%,94.5% 100%,96% 8%,97.5% 100%,100% 0)}
+.tear-up{width:100%;height:24px;background:#1C1C1C;clip-path:polygon(0 100%,1.5% 0%,3% 90%,4.5% 0%,6% 80%,7.5% 0%,9% 95%,10.5% 0%,12% 75%,13.5% 0%,15% 85%,16.5% 0%,18% 70%,19.5% 0%,21% 92%,22.5% 0%,24% 78%,25.5% 0%,27% 88%,28.5% 0%,30% 72%,31.5% 0%,33% 82%,34.5% 0%,36% 95%,37.5% 0%,39% 76%,40.5% 0%,42% 86%,43.5% 0%,45% 70%,46.5% 0%,48% 90%,49.5% 0%,51% 78%,52.5% 0%,54% 84%,55.5% 0%,57% 72%,58.5% 0%,60% 92%,61.5% 0%,63% 80%,64.5% 0%,66% 88%,67.5% 0%,69% 74%,70.5% 0%,72% 94%,73.5% 0%,75% 78%,76.5% 0%,78% 84%,79.5% 0%,81% 70%,82.5% 0%,84% 90%,85.5% 0%,87% 80%,88.5% 0%,90% 86%,91.5% 0%,93% 72%,94.5% 0%,96% 92%,97.5% 0%,100% 100%)}
+.tear-cream-down{width:100%;height:24px;background:#F4EFE4;clip-path:polygon(0 0,1.5% 100%,3% 10%,4.5% 100%,6% 20%,7.5% 100%,9% 5%,10.5% 100%,12% 25%,13.5% 100%,15% 15%,16.5% 100%,18% 30%,19.5% 100%,21% 8%,22.5% 100%,24% 22%,25.5% 100%,27% 12%,28.5% 100%,30% 28%,31.5% 100%,33% 18%,34.5% 100%,36% 5%,37.5% 100%,39% 24%,40.5% 100%,42% 14%,43.5% 100%,45% 30%,46.5% 100%,48% 10%,49.5% 100%,51% 22%,52.5% 100%,54% 16%,55.5% 100%,57% 28%,58.5% 100%,60% 8%,61.5% 100%,63% 20%,64.5% 100%,66% 12%,67.5% 100%,69% 26%,70.5% 100%,72% 6%,73.5% 100%,75% 22%,76.5% 100%,78% 16%,79.5% 100%,81% 30%,82.5% 100%,84% 10%,85.5% 100%,87% 20%,88.5% 100%,90% 14%,91.5% 100%,93% 28%,94.5% 100%,96% 8%,97.5% 100%,100% 0)}
+
+.dark-sec{background:#1C1C1C;padding:52px 48px;position:relative;z-index:1}
+.grid-bg-d{position:absolute;inset:0;background-image:linear-gradient(#444 1px,transparent 1px),linear-gradient(90deg,#444 1px,transparent 1px);background-size:32px 32px;opacity:0.1;pointer-events:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;position:relative;z-index:1}
+.about-big{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;line-height:1;color:#F4EFE4}
+.about-big em{font-style:italic;font-weight:400;color:#F2C14E;display:block;font-size:36px}
+.about-annotation{font-family:'Caveat',cursive;font-size:22px;color:#777;margin-top:10px;transform:rotate(-2deg);display:block}
+.about-text{font-size:14px;color:#aaa;line-height:1.85;border-left:2px solid #F2C14E;padding-left:20px}
+.about-text strong{color:#F4EFE4;font-weight:500}
+.sec-eyebrow{font-family:'Caveat',cursive;font-size:22px;color:#999;margin-bottom:4px;display:block}
+.sec-eyebrow-light{font-family:'Caveat',cursive;font-size:22px;color:#888;margin-bottom:4px;display:block}
+.sec-kicker{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#555;margin-bottom:32px}
+.sec-kicker-d{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#555;margin-bottom:32px}
+.page-label{font-family:'Caveat',cursive;font-size:15px;color:#B8CDE8;position:absolute;top:20px;right:48px;transform:rotate(5deg)}
+
+.cream-sec{background:#F4EFE4;padding:52px 48px;position:relative;z-index:1}
+
+.exp-entry{display:grid;grid-template-columns:100px 1fr;gap:24px;padding:28px 0;border-top:0.5px solid #d0c8b8;position:relative}
+.exp-entry:first-child{border-top:none;padding-top:0}
+.exp-date{font-family:'Caveat',cursive;font-size:15px;color:#aaa;line-height:1.5}
+.exp-annotation{font-family:'Caveat',cursive;font-size:18px;color:#999;display:inline-block;transform:rotate(-2deg);margin-left:10px}
+.exp-annotation-block{font-family:'Caveat',cursive;font-size:18px;color:#999;display:block;transform:rotate(-1deg);margin-top:10px}
+.exp-org{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#1C1C1C;margin-bottom:3px;line-height:1.1}
+.exp-role{font-family:'Caveat',cursive;font-size:16px;color:#F2C14E;background:#1C1C1C;display:inline-block;padding:2px 10px;margin-bottom:10px;transform:rotate(-1deg)}
+.exp-client{font-size:12px;color:#aaa;margin-bottom:8px;font-style:italic}
+.exp-bullets{list-style:none;padding:0}
+.exp-bullets li{font-size:13px;color:#555;line-height:1.7;padding-left:16px;position:relative;margin-bottom:4px}
+.exp-bullets li:before{content:"—";position:absolute;left:0;color:#F2C14E}
+.exp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.etag{font-size:11px;color:#1C1C1C;border:0.5px solid #b0a898;padding:3px 10px}
+
+.mid-tear{position:relative;height:40px;overflow:hidden;z-index:1}
+.mid-tear-top{width:100%;height:20px;background:#F4EFE4;clip-path:polygon(0 0,1.5% 100%,3% 10%,4.5% 100%,6% 20%,7.5% 100%,9% 5%,10.5% 100%,12% 25%,13.5% 100%,15% 15%,16.5% 100%,18% 30%,19.5% 100%,21% 8%,22.5% 100%,24% 22%,25.5% 100%,27% 12%,28.5% 100%,30% 28%,31.5% 100%,33% 18%,34.5% 100%,36% 5%,37.5% 100%,39% 24%,40.5% 100%,42% 14%,43.5% 100%,45% 30%,46.5% 100%,48% 10%,49.5% 100%,51% 22%,52.5% 100%,53% 16%,55.5% 100%,57% 28%,58.5% 100%,60% 8%,61.5% 100%,63% 20%,64.5% 100%,66% 12%,67.5% 100%,69% 26%,70.5% 100%,72% 6%,73.5% 100%,75% 22%,76.5% 100%,78% 16%,79.5% 100%,81% 30%,82.5% 100%,84% 10%,85.5% 100%,87% 20%,88.5% 100%,90% 14%,91.5% 100%,93% 28%,94.5% 100%,96% 8%,97.5% 100%,100% 0)}
+.mid-divider{background:#e8e0d0;height:2px;width:100%}
+
+.proj-entry{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:28px 0;border-top:0.5px solid #d0c8b8;position:relative}
+.proj-entry:first-child{border-top:none;padding-top:0}
+.proj-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#e8e0d0;line-height:1}
+.proj-label{font-family:'Caveat',cursive;font-size:15px;color:#aaa;display:block;margin-top:2px}
+.proj-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#1C1C1C;margin-bottom:8px;line-height:1.1}
+.proj-finding{font-family:'Caveat',cursive;font-size:15px;color:#1C1C1C;background:#F2C14E;display:inline-block;padding:4px 12px;margin-bottom:12px;transform:rotate(-1deg)}
+.proj-desc{font-size:13px;color:#666;line-height:1.7;margin-bottom:14px}
+.proj-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{font-size:11px;color:#1C1C1C;border:0.5px solid #b0a898;padding:3px 10px}
+.proj-annotation{font-family:'Caveat',cursive;font-size:16px;color:#bbb;position:absolute;right:0;top:32px;transform:rotate(3deg)}
+
+.dashboard-sec{background:#1C1C1C;padding:52px 48px;position:relative;z-index:1}
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.dash-card{background:#242424;border:0.5px solid #333;position:relative;overflow:hidden}
+.dash-placeholder{height:160px;background:#2a2a2a;display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:0.5px solid #333}
+.dash-media{height:160px;background:#2a2a2a;display:block;border-bottom:0.5px solid #333;overflow:hidden;text-decoration:none}
+.dash-media img,.dash-media video{width:100%;height:100%;object-fit:cover;display:block}
+.dash-media video{background:#111}
+.dash-icon{width:32px;height:32px;border:1px dashed #444;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
+.dash-icon-line{width:16px;height:2px;background:#555;display:block}
+.dash-placeholder-label{font-family:'Caveat',cursive;font-size:13px;color:#555;text-align:center;line-height:1.5}
+.dash-title{font-size:12px;color:#aaa;padding:10px 12px 4px;font-weight:500}
+.dash-subtitle{font-size:13px;color:#555;padding:0 12px 12px;font-family:'Caveat',cursive}
+.dash-annotation{font-family:'Caveat',cursive;font-size:17px;color:#8e8e8e;text-align:center;margin-top:24px}
+.dark-eyebrow{font-family:'Caveat',cursive;font-size:18px;color:#cfc7b8;margin-bottom:4px;display:block}
+.dark-kicker{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#F4EFE4;margin-bottom:32px}
+
+.cert-sec{background:#F4EFE4;padding:52px 48px;position:relative;z-index:1}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:8px}
+.cert-card{background:#fff;border:0.5px solid #d0c8b8;padding:16px;position:relative;display:block;text-decoration:none;color:inherit}
+.cert-card:hover{box-shadow:0 10px 18px rgba(0,0,0,0.08)}
+.cert-issuer{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#aaa;margin-bottom:6px}
+.cert-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#1C1C1C;line-height:1.2;margin-bottom:8px}
+.cert-badge{font-family:'Caveat',cursive;font-size:14px;background:#F2C14E;color:#5a3e00;padding:2px 8px;display:inline-block}
+
+.beyond-sec{background:#F4EFE4;padding:52px 48px;position:relative;z-index:1;border-top:0.5px solid #d0c8b8}
+.timeline{position:relative;margin-top:8px}
+.timeline-line{position:absolute;left:86px;top:0;bottom:0;width:1px;background:#d0c8b8}
+.tl-item{display:grid;grid-template-columns:86px 32px 1fr;gap:0;padding:0 0 36px;align-items:start;position:relative}
+.tl-item:last-child{padding-bottom:0}
+.tl-date{font-family:'Caveat',cursive;font-size:15px;color:#aaa;text-align:right;padding-right:16px;padding-top:2px;line-height:1.4}
+.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid #F2C14E;background:#F4EFE4;margin-top:4px;z-index:1;position:relative;margin-left:10px}
+.tl-dot.win{background:#F2C14E}
+.tl-content{padding-left:20px}
+.tl-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#1C1C1C;margin-bottom:4px;line-height:1.2}
+.tl-role{font-family:'Caveat',cursive;font-size:15px;color:#F2C14E;margin-bottom:6px;display:block}
+.tl-desc{font-size:12px;color:#777;line-height:1.7}
+.tl-annotation{font-family:'Caveat',cursive;font-size:18px;color:#bbb;margin-top:4px;display:block;transform:rotate(-1deg)}
+.tl-win-badge{font-family:'Caveat',cursive;font-size:14px;background:#E8795A;color:#fff;padding:2px 10px;display:inline-block;transform:rotate(-2deg);margin-top:6px}
+
+.event-stacks-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:48px;margin-top:40px;padding:0 20px}
+.event-section{display:flex;flex-direction:column}
+.event-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#1C1C1C;margin-bottom:20px;text-align:center}
+.event-stack{position:relative;width:260px;height:340px;margin:0 auto;cursor:pointer}
+.event-polaroid{position:absolute;inset:0;display:block;text-decoration:none;color:#1C1C1C;background:#fff;border:0.5px solid #d0c8b8;box-shadow:0 18px 28px rgba(0,0,0,0.16);padding:10px 10px 14px;transform:translate(var(--x,0px),var(--y,0px)) rotate(var(--r,-2deg));transition:transform 260ms ease,box-shadow 260ms ease;width:100%;height:100%;display:flex;flex-direction:column}
+.event-polaroid:hover{box-shadow:0 22px 34px rgba(0,0,0,0.18)}
+.event-photo{width:100%;height:260px;overflow:hidden;background:#F4EFE4;border:0.5px solid #e6dfd0;flex-shrink:0}
+.event-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.event-cap{font-family:'Caveat',cursive;font-size:14px;color:#666;margin-top:8px;flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 4px;line-height:1.3}
+.event-tape{width:44px;height:12px;background:#F2C14E;opacity:0.7;position:absolute;top:-4px;left:50%;transform:translateX(-50%) rotate(-2deg)}
+.memory-note{font-family:'Caveat',cursive;font-size:18px;color:#999;display:inline-block;transform:rotate(-2deg);margin-top:10px}
+@media (max-width:768px){.event-stacks-container{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;padding:0}.event-stack{width:180px;height:240px}.event-photo{height:180px}}
+
+.skills-sec{background:#F4EFE4;padding:0 48px 52px;position:relative;z-index:1;border-top:0.5px solid #d0c8b8}
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px}
+.skills-col-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:#1C1C1C;margin-bottom:16px}
+.skill-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:12px;background:#1C1C1C;color:#F4EFE4;padding:5px 14px}
+.how-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.how-arrow{font-family:'Caveat',cursive;font-size:20px;color:#F2C14E;flex-shrink:0;margin-top:-2px}
+.how-text{font-size:13px;color:#555;line-height:1.6}
+.how-text strong{color:#1C1C1C;font-weight:500}
+
+.contact-sec{background:#1C1C1C;padding:52px 48px;position:relative;z-index:1}
+.contact-big{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;line-height:1;color:#F4EFE4;margin-bottom:8px}
+.contact-big em{font-style:italic;font-weight:400;color:#F2C14E}
+.contact-note{font-family:'Caveat',cursive;font-size:18px;color:#666;margin-bottom:36px;display:block;transform:rotate(-1deg)}
+.contact-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.clink{font-size:13px;color:#F2C14E;text-decoration:none;border-bottom:0.5px solid #F2C14E;padding-bottom:2px}
+.contact-closing{font-family:'Caveat',cursive;font-size:18px;color:#555;max-width:520px;line-height:1.5}
+.footer-bar{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:0.5px solid #2a2a2a}
+.footer-name{font-family:'Playfair Display',serif;font-size:14px;color:#444;font-style:italic}
+.footer-copy{font-size:12px;color:#333}
+</style>
+
+<div class="site">
+<div class="grid-bg"></div>
+
+<div class="nav-bar">
+  <span class="nav-badge">portfolio — 2026</span>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#experience">experience</a>
+    <a href="#projects">projects</a>
+    <a href="#dashboards">dashboard samples</a>
+    <a href="#beyond">beyond the data</a>
+    <a href="#contact">contact</a>
+  </div>
+  <span class="nav-note">not a resume — A spotify wrapped up of my life</span>
+</div>
+
+<div class="sec hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-copy">
+    <div class="hero-annotation">not a LinkedIn page btw —</div>
+    <div class="scroll-note">scroll. it's a harsh world →</div>
+    <svg class="arrow-curve" width="40" height="40" viewBox="0 0 40 40" fill="none">
+      <path d="M36 4 C30 6, 12 12, 6 34" stroke="#bbb" stroke-width="1.5" fill="none" stroke-dasharray="3,3"/>
+      <path d="M4 28 L6 34 L12 30" stroke="#bbb" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="sirigiri-label">sirigiri</span>
+    <div class="hero-name">VARSHITHA</div>
+    <span class="hero-name-italic">analyst. builder. gets it done.</span>
+    <div class="sticker-row">
+      <span class="sticker s-amber">1.7M+ records analysed</span>
+      <span class="sticker s-coral">Govt EMS</span>
+      <span class="sticker s-blue">findings went to the top</span>
+      <span class="sticker s-white">MBA Business Analytics</span>
+    </div>
+    <p class="hero-desc">I find what the data's hiding — and <strong>make sure someone does something about it.</strong> End-to-end from raw records to boardroom presentations. Healthcare, finance, public sector.</p>
+    <div class="btns">
+      <a class="btn-dark" href="#projects" style="text-decoration:none;display:inline-block">see my work</a>
+      <a class="btn-outline" href="#contact" style="text-decoration:none;display:inline-block">contact</a>
+      <span class="btn-note">Don't be shy. go ahead and scroll →</span>
+    </div>
+      </div>
+
+      <div class="myself-deck" aria-label="Photo deck">
+        <div class="myself-stack" id="myselfDeck" aria-label="Shufflable polaroid stack">
+          <a class="myself-polaroid" href="/api/assets/personal/myself.jpg" target="_blank" rel="noreferrer" data-polaroid>
+            <div class="myself-tape"></div>
+            <div class="myself-photo"><img src="/api/assets/personal/myself.jpg" alt="Varshitha portrait 1" loading="lazy"></div>
+            <div class="myself-cap"><span>myself.jpg</span><span>Life when I was sane</span></div>
+          </a>
+          <a class="myself-polaroid" href="/api/assets/personal/myself2.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+            <div class="myself-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+            <div class="myself-photo"><img src="/api/assets/personal/myself2.jpeg" alt="Varshitha portrait 2" loading="lazy"></div>
+            <div class="myself-cap"><span>myself2.jpeg</span><span>trynna be aesthetic</span></div>
+          </a>
+          <a class="myself-polaroid" href="/api/assets/personal/myself%203.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+            <div class="myself-tape" style="background:#E8795A;opacity:0.65"></div>
+            <div class="myself-photo"><img src="/api/assets/personal/myself%203.jpeg" alt="Varshitha portrait 3" loading="lazy"></div>
+            <div class="myself-cap"><span>myself 3.jpeg</span><span>on stage</span></div>
+          </a>
+        </div>
+        <div class="myself-controls">
+          <button class="myself-shuffle" type="button" data-action="shuffle">shuffle</button>
+          <span class="myself-note">click a photo. i dare you.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tear-down"></div>
+
+<div class="sec dark-sec" id="about">
+  <div class="grid-bg-d"></div>
+  <div class="page-label">wait — let me tell you who I am first</div>
+  <div class="about-grid">
+    <div>
+      <span class="sec-eyebrow" style="color:#666">who I am</span>
+      <div class="about-big">analysis<em>that moves</em>people.</div>
+      <span class="about-annotation">— not just pretty charts</span>
+    </div>
+    <div class="about-text">
+      Started with a <strong>BSc in Biotechnology, Genetics and Chemistry</strong> — which means I understand the domain, not just the data.<br><br>
+      Now finishing an <strong>MBA in Business Analytics</strong> (Aug 2026). In between I've worked on a live EMS analytics programme, presented findings to <strong>very senior stakeholders</strong>, and built dashboards that actually informed resource decisions.<br><br>
+      I don't just run the analysis. I <strong>walk into the room and make it land.</strong> Put me on a mic unannounced and I'll have the audience with me inside 60 seconds.
+    </div>
+  </div>
+</div>
+
+<div class="tear-up"></div>
+
+<div class="sec cream-sec" id="experience">
+  <span class="sec-eyebrow-light">where I've worked</span>
+  <div class="sec-kicker">experience</div>
+
+  <div class="exp-entry">
+    <div class="exp-date">Dec 2025<br>— Mar 2026</div>
+    <div>
+      <div class="exp-org">Access Healthcare International <span class="exp-annotation">— "I just went through even 7 stages of anger - Phoebe buffay"</span></div>
+      <span class="exp-role">Project Consultant (Freelance)</span>
+      <div class="exp-client">Client: Govt of Odisha (quality review)</div>
+      <ul class="exp-bullets">
+        <li>Analysed 2 years of EMS incident data (170k+ records) across multiple service types and call categories</li>
+        <li>Quantified SLA compliance at 60–70% and benchmarked response times across service zones</li>
+        <li>Surfaced medicine and equipment compliance as low as 10% across ambulance fleets</li>
+        <li>Identified 90% of drivers on 24-hour shifts — directly informed resource reallocation recommendations</li>
+        <li>Built year-on-year dashboards and structured reports used by very senior stakeholders</li>
+      </ul>
+      <span class="exp-annotation-block">this project took my sleep, my sanity, and everything I had. but damn, it was worth it.</span>
+      <div class="exp-tags"><span class="etag">Python</span><span class="etag">Power BI</span><span class="etag">React</span><span class="etag">FastAPI</span><span class="etag">Excel</span></div>
+    </div>
+  </div>
+
+  <div class="exp-entry">
+    <div class="exp-date">Oct 2025<br>— Dec 2025</div>
+    <div>
+      <div class="exp-org">Tech Mahindra</div>
+      <span class="exp-role">Tech Support Intern — NGS</span>
+      <ul class="exp-bullets">
+        <li>Analysed external AI system architecture to identify automation opportunities and dependency risks</li>
+        <li>Evaluated environment configurations and documented runtime and installation risks</li>
+        <li>Supported tooling evaluation for analytics pipeline automation</li>
+      </ul>
+      <div class="exp-tags"><span class="etag">AI Systems</span><span class="etag">Documentation</span><span class="etag">Pipeline Analysis</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="mid-tear">
+  <div class="mid-tear-top"></div>
+</div>
+<div style="background:#F4EFE4;padding:12px 48px;z-index:1;position:relative;display:flex;align-items:center;gap:12px">
+  <span style="font-family:'Caveat',cursive;font-size:16px;color:#bbb;transform:rotate(-2deg);display:inline-block">and here's what I built —</span>
+  <svg width="32" height="16" viewBox="0 0 32 16" fill="none"><path d="M2 8 L26 8" stroke="#F2C14E" stroke-width="1.5" fill="none"/><path d="M20 4 L26 8 L20 12" stroke="#F2C14E" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</div>
+
+<div class="sec cream-sec" id="projects" style="padding-top:24px">
+  <span class="sec-eyebrow-light">things I've actually built</span>
+  <div class="sec-kicker">projects</div>
+
+  <div class="proj-entry">
+    <div>
+      <div class="proj-num">01</div>
+      <span class="proj-label">gemma</span>
+    </div>
+    <div>
+      <div class="proj-title">Marin County (USA) EMS Quality Assessment — GEMMA</div>
+      <div class="proj-finding">Critical window analysis reveals hours with high risk cases with large delays</div>
+      <div class="proj-desc">End-to-end analytics platform built for an EMS quality review using Marin County (USA) incident data. Processed 108k+ records, built operational dashboards and a React-based interface. Findings were presented to senior stakeholders and used for resource planning decisions.</div>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Power BI</span><span class="ptag">React</span><span class="ptag">FastAPI</span></div>
+    </div>
+    <span class="proj-annotation">yeah I did that →</span>
+  </div>
+
+  <div class="proj-entry">
+    <div>
+      <div class="proj-num">02</div>
+      <span class="proj-label">healthcare</span>
+    </div>
+    <div>
+      <div class="proj-title">Chemotherapy Survival Analysis</div>
+      <div class="proj-finding">statistical models → clinical decisions</div>
+      <div class="proj-desc">Statistical models and visual summaries communicating patient outcome trends for clinical stakeholders. Built Power BI dashboards to make survival data interpretable for non-technical decision makers.</div>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Power BI</span><span class="ptag">Excel</span></div>
+    </div>
+  </div>
+
+  <div class="proj-entry">
+    <div>
+      <div class="proj-num">03</div>
+      <span class="proj-label">finance</span>
+    </div>
+    <div>
+      <div class="proj-title">Credit Risk Classification</div>
+      <div class="proj-finding">risk → readable → actionable</div>
+      <div class="proj-desc">Customer risk classification models and structured reporting dashboards. Built for business interpretation — not just data scientists. The output was a decision-support interface, not a model dump.</div>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Excel</span><span class="ptag">Power BI</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tear-down"></div>
+
+<div class="sec dashboard-sec" id="dashboards">
+  <div class="grid-bg-d"></div>
+  <div style="position:relative;z-index:1">
+    <span class="dark-eyebrow">see the actual work</span>
+    <div class="dark-kicker">dashboard samples</div>
+    <div class="dash-grid">
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/gemma%20db.mp4" target="_blank" rel="noreferrer">
+          <video src="/api/assets/dashboards/gemma%20db.mp4" muted playsinline preload="metadata"></video>
+        </a>
+        <div class="dash-title">GEMMA (Marin County) — Risk Analysis Interface</div>
+        <div class="dash-subtitle">React + FastAPI — screen recording</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/cybersecurity%20db.mp4" target="_blank" rel="noreferrer">
+          <video src="/api/assets/dashboards/cybersecurity%20db.mp4" muted playsinline preload="metadata"></video>
+        </a>
+        <div class="dash-title">Cybersecurity Analytics</div>
+        <div class="dash-subtitle">App demo — screen recording</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/patient%20demographics.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/patient%20demographics.png" alt="Patient demographics dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Patient Demographics</div>
+        <div class="dash-subtitle">Power BI — 50.79K patients</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/treatment%20and%20dosage.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/treatment%20and%20dosage.png" alt="Treatment and dosage dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Treatment &amp; Dosage</div>
+        <div class="dash-subtitle">Power BI — regimen patterns</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/survival%20and%20outcome.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/survival%20and%20outcome.png" alt="Survival and outcome dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Survival &amp; Outcome</div>
+        <div class="dash-subtitle">Power BI — survival by segment</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/credit%20risk.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/credit%20risk.png" alt="Credit risk dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Credit Risk</div>
+        <div class="dash-subtitle">Power BI — risk profiles</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/air%20pollution.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/air%20pollution.png" alt="Air pollution dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Air Pollution Analysis</div>
+        <div class="dash-subtitle">Power BI — environmental data</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/blinkit%20grocery%20db_page-0001.jpg" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/blinkit%20grocery%20db_page-0001.jpg" alt="Blinkit grocery dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Blinkit Grocery Analysis</div>
+        <div class="dash-subtitle">Dashboard — delivery insights</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/Cyber%20fraud%20db_page-0001.jpg" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/Cyber%20fraud%20db_page-0001.jpg" alt="Cyber fraud dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Cybersecurity Fraud Detection</div>
+        <div class="dash-subtitle">Analytics — threat patterns</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/finance%20setiment%20analysis_page-0001.jpg" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/finance%20setiment%20analysis_page-0001.jpg" alt="Finance sentiment analysis dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Finance Sentiment Analysis</div>
+        <div class="dash-subtitle">Dashboard — market analysis</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/flipkart%20db.pdf" target="_blank" rel="noreferrer">
+          <div class="dash-placeholder">
+            <div class="dash-icon"><span class="dash-icon-line"></span></div>
+            <div class="dash-placeholder-label">Flipkart Database</div>
+          </div>
+        </a>
+        <div class="dash-title">Flipkart E-commerce</div>
+        <div class="dash-subtitle">Dashboard — sales & analytics</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/sales%20db.pdf" target="_blank" rel="noreferrer">
+          <div class="dash-placeholder">
+            <div class="dash-icon"><span class="dash-icon-line"></span></div>
+            <div class="dash-placeholder-label">Sales Database</div>
+          </div>
+        </a>
+        <div class="dash-title">Sales Analytics</div>
+        <div class="dash-subtitle">Dashboard — revenue insights</div>
+      </div>
+      <div class="dash-card">
+        <a class="dash-media" href="/api/assets/dashboards/tumor%20analysis.png" target="_blank" rel="noreferrer">
+          <img src="/api/assets/dashboards/tumor%20analysis.png" alt="Tumor analysis dashboard" loading="lazy">
+        </a>
+        <div class="dash-title">Tumor Analysis</div>
+        <div class="dash-subtitle">Power BI — medical research</div>
+      </div>
+    </div>
+    <div class="dash-annotation">yes, these are mine. no, i didn't sleep.</div>
+  </div>
+</div>
+
+<div class="tear-up"></div>
+
+<div class="sec cert-sec" id="certs">
+  <span class="sec-eyebrow-light">what I've studied on the side</span>
+  <div class="sec-kicker">certifications</div>
+  <div class="cert-grid">
+    <a class="cert-card" href="/api/assets/certificates/dc%20intermediate%20sql.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">Intermediate SQL</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/dc%20introduction%20to%20powerbi.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">Introduction to Power BI</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/dc%20introduction%20to%20R.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">Introduction to R</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/datacamp%20ML%20for%20business.png" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">ML for Business</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/dc%20understanding%20artificial%20intelligence.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">DataCamp</div>
+      <div class="cert-name">Understanding AI</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/CertificateOfCompletion_Statistics%20Foundations%201%20The%20Basics.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">LinkedIn Learning</div>
+      <div class="cert-name">Statistics Foundations 1</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/open%20university.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">The Open University</div>
+      <div class="cert-name">Open University Certificate</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/HP%20life.png" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">HP LIFE</div>
+      <div class="cert-name">HP LIFE Certificate</div>
+      <span class="cert-badge">open</span>
+    </a>
+    <a class="cert-card" href="/api/assets/certificates/python%20infosys%20cert.pdf" target="_blank" rel="noreferrer">
+      <div class="cert-issuer">Infosys</div>
+      <div class="cert-name">Python Certificate</div>
+      <span class="cert-badge">open</span>
+    </a>
+  </div>
+</div>
+
+<div class="sec beyond-sec" id="beyond">
+  <span class="sec-eyebrow-light">beyond the data</span>
+  <div class="sec-kicker">the timeline</div>
+  <div class="timeline">
+    <div class="timeline-line"></div>
+
+    <div class="tl-item">
+      <div class="tl-date">Dec<br>2022</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">V4G — Voice 4 Girls</div>
+        <span class="tl-role">Camp Counsellor — NGO</span>
+        <div class="tl-desc">Educated marginalised adolescent girls on careers, sex ed, and menstruation. Managed a full classroom independently. One of those things that stays with you.</div>
+        <span class="tl-annotation">— this one actually mattered</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">2023<br>— 2024</div>
+      <div class="tl-dot win"></div>
+      <div class="tl-content">
+        <div class="tl-title">Student Council — Loyola Academy</div>
+        <span class="tl-role">Documentation Head (Bachelors)</span>
+        <div class="tl-desc">Led all documentation for the student council during undergrad. Structured chaos, basically.</div>
+        <span class="tl-win-badge">award recipient</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Feb<br>2024</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">Lab X — Biotech Conference</div>
+        <span class="tl-role">Core Committee Member</span>
+        <div class="tl-desc">Part of the team that brought a biotech conference to life. End-to-end coordination — logistics, speakers, the whole thing.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">2025</div>
+      <div class="tl-dot"></div>
+      <div class="tl-content">
+        <div class="tl-title">NGL — Nothing Gets Left</div>
+        <span class="tl-role">Co-founder — Anurag University Podcast</span>
+        <div class="tl-desc">Started a podcast under the Social Media Club. Collected anonymous student questions, brought in guests, asked the uncomfortable ones. Good times.</div>
+        <span class="tl-annotation">— yes I loved that</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Feb<br>2026</div>
+      <div class="tl-dot win"></div>
+      <div class="tl-content">
+        <div class="tl-title">Tejas — Business Expo, Anurag University</div>
+        <span class="tl-role">Project Lead</span>
+        <div class="tl-desc">Presented Smart Bin Go — an automatic waste collection bin with an AI classification model. Beat the room.</div>
+        <span class="tl-win-badge">best project award</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date">Mar<br>2026</div>
+      <div class="tl-dot win"></div>
+      <div class="tl-content">
+        <div class="tl-title">BizHack — Business Hackathon</div>
+        <span class="tl-role">Head, Core Committee</span>
+        <div class="tl-desc">Brought the entire event to life. Designed the web portal and guide website used during the hackathon, managed vendors for welcome kits, coordinated everything from 0 to event day. So much work. Worth it.</div>
+        <span class="tl-annotation">— built the thing from scratch</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:44px">
+    <span class="sec-eyebrow-light">memory wall</span>
+    <div class="sec-kicker">events & moments</div>
+    <span class="memory-note">click a stack to shuffle</span>
+  </div>
+
+  <div class="event-stacks-container">
+    <div class="event-section">
+      <div class="event-title">BizHack — Mar 2026</div>
+      <div class="event-stack" data-event="bizhack">
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(1).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(1).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">event</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(2).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(2).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">team</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(3).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#E8795A;opacity:0.6"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(3).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">hosted</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(4).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#F2C14E;transform:translateX(-50%) rotate(-3deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(4).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">moments</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(5).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(5).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">wrap</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(7).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(7).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">built</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/bizhack%20%20(8).jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#E8795A;opacity:0.6"></div>
+          <div class="event-photo"><img src="/api/assets/personal/bizhack%20%20(8).jpeg" alt="BizHack" loading="lazy"></div>
+          <div class="event-cap">together</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">Tejas — Feb 2026</div>
+      <div class="event-stack" data-event="tejas">
+        <a class="event-polaroid" href="/api/assets/personal/tejas%201.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/tejas%201.png" alt="Tejas" loading="lazy"></div>
+          <div class="event-cap">expo</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/Tejas%202.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/Tejas%202.png" alt="Tejas" loading="lazy"></div>
+          <div class="event-cap">smart bin</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/tejas%20best%20project%20award.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#E8795A;opacity:0.6"></div>
+          <div class="event-photo"><img src="/api/assets/personal/tejas%20best%20project%20award.png" alt="Tejas" loading="lazy"></div>
+          <div class="event-cap">best</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">LabX — Feb 2024</div>
+      <div class="event-stack" data-event="labx">
+        <a class="event-polaroid" href="/api/assets/personal/labx.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/labx.png" alt="LabX" loading="lazy"></div>
+          <div class="event-cap">conference</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/labx2.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/labx2.jpeg" alt="LabX" loading="lazy"></div>
+          <div class="event-cap">core</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/labx3.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#E8795A;opacity:0.6"></div>
+          <div class="event-photo"><img src="/api/assets/personal/labx3.jpeg" alt="LabX" loading="lazy"></div>
+          <div class="event-cap">speakers</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">NGL Podcast — 2025</div>
+      <div class="event-stack" data-event="ngl">
+        <a class="event-polaroid" href="/api/assets/personal/ngl1.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/ngl1.png" alt="NGL" loading="lazy"></div>
+          <div class="event-cap">mic</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/ngl2.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/ngl2.png" alt="NGL" loading="lazy"></div>
+          <div class="event-cap">co-founded</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">Student Council</div>
+      <div class="event-stack" data-event="sc">
+        <a class="event-polaroid" href="/api/assets/personal/sc%20award.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/sc%20award.png" alt="SC" loading="lazy"></div>
+          <div class="event-cap">award</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">BI Battle</div>
+      <div class="event-stack" data-event="bibattle">
+        <a class="event-polaroid" href="/api/assets/personal/BI%20battle%201st%20prize.png" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/BI%20battle%201st%20prize.png" alt="BI" loading="lazy"></div>
+          <div class="event-cap">1st</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">V4G — Dec 2022</div>
+      <div class="event-stack" data-event="v4g">
+        <a class="event-polaroid" href="/api/assets/personal/v4g1.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/v4g1.jpeg" alt="V4G" loading="lazy"></div>
+          <div class="event-cap">girls</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/v4g2.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/v4g2.jpeg" alt="V4G" loading="lazy"></div>
+          <div class="event-cap">camp</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/v4g3.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#E8795A;opacity:0.6"></div>
+          <div class="event-photo"><img src="/api/assets/personal/v4g3.jpeg" alt="V4G" loading="lazy"></div>
+          <div class="event-cap">group</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/v4g4.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#F2C14E;transform:translateX(-50%) rotate(-3deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/v4g4.jpeg" alt="V4G" loading="lazy"></div>
+          <div class="event-cap">together</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/v4g5.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/v4g5.jpeg" alt="V4G" loading="lazy"></div>
+          <div class="event-cap">impact</div>
+        </a>
+      </div>
+    </div>
+    <div class="event-section">
+      <div class="event-title">Hosting</div>
+      <div class="event-stack" data-event="hosting">
+        <a class="event-polaroid" href="/api/assets/personal/host1.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape"></div>
+          <div class="event-photo"><img src="/api/assets/personal/host1.jpeg" alt="Hosting" loading="lazy"></div>
+          <div class="event-cap">stage</div>
+        </a>
+        <a class="event-polaroid" href="/api/assets/personal/host2.jpeg" target="_blank" rel="noreferrer" data-polaroid>
+          <div class="event-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
+          <div class="event-photo"><img src="/api/assets/personal/host2.jpeg" alt="Hosting" loading="lazy"></div>
+          <div class="event-cap">mic</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<div class="sec skills-sec" id="skills">
+  <span class="sec-eyebrow-light" style="padding-top:52px;display:block">the toolkit</span>
+  <div class="skills-grid">
+    <div>
+      <div class="skills-col-title">technical</div>
+      <div class="skill-pills">
+        <span class="pill">Power BI</span><span class="pill">Python</span><span class="pill">SQL</span>
+        <span class="pill">Excel</span><span class="pill">R Studio</span><span class="pill">React</span>
+        <span class="pill">FastAPI</span><span class="pill">Notion</span><span class="pill">Google Workspace</span><span class="pill">Canva</span>
+      </div>
+    </div>
+    <div>
+      <div class="skills-col-title">how I actually work</div>
+      <div class="how-item"><span class="how-arrow">→</span><span class="how-text"><strong>End-to-end.</strong> Data wrangling to stakeholder presentation — same person, no handoffs.</span></div>
+      <div class="how-item"><span class="how-arrow">→</span><span class="how-text"><strong>I communicate complexity.</strong> Non-technical room? I will make the data make sense to them.</span></div>
+      <div class="how-item"><span class="how-arrow">→</span><span class="how-text"><strong>I document properly.</strong> Scope docs, requirements, structured reports — not an afterthought.</span></div>
+      <div class="how-item"><span class="how-arrow">→</span><span class="how-text"><strong>Healthcare is home base</strong> — finance and public sector already in the portfolio.</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tear-down"></div>
+
+<div class="sec contact-sec" id="contact">
+  <div class="contact-big">let's<em> talk.</em></div>
+  <span class="contact-note">— if you need someone who can do the analysis AND stand in front of your client and explain it</span>
+  <div class="contact-links">
+    <a class="clink" href="mailto:sirigirivarshitha@gmail.com">sirigirivarshitha@gmail.com</a>
+    <a class="clink" href="http://www.linkedin.com/in/s-varshitha-8962a6229">LinkedIn</a>
+    <a class="clink" href="https://github.com/varsh0613">GitHub</a>
+  </div>
+  <div class="contact-closing">available for full-time roles immediately. remote or office doesn't matter, Location: Hyderabad. healthcare analytics, general analytics — yes to all of it. (i reply fast, I promise.)</div>
+  <div class="footer-bar">
+    <span class="footer-name">sirigiri varshitha — 2026</span>
+    <span class="footer-copy">MBA Business Analytics, Anurag University</span>
+  </div>
+</div>
+
+</div>
