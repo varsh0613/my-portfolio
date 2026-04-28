@@ -41,8 +41,8 @@
 .myself-polaroid:hover{box-shadow:0 22px 34px rgba(0,0,0,0.18)}
 .myself-photo{width:100%;height:300px;overflow:hidden;background:#F4EFE4;border:0.5px solid #e6dfd0}
 .myself-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.myself-cap{font-family:'Caveat',cursive;font-size:15px;color:#666;margin-top:10px;display:flex;justify-content:space-between;gap:10px}
-.myself-cap span{white-space:nowrap}
+.myself-cap{font-family:'Caveat',cursive;font-size:15px;color:#666;margin-top:10px;display:flex;justify-content:center;gap:10px;text-align:center}
+.myself-cap span{white-space:normal}
 .myself-tape{width:44px;height:12px;background:#F2C14E;opacity:0.7;position:absolute;top:-4px;left:50%;transform:translateX(-50%) rotate(-2deg)}
 .myself-controls{display:flex;align-items:center;gap:10px;margin-top:14px;justify-content:flex-end}
 .myself-shuffle{background:#1C1C1C;color:#F4EFE4;padding:9px 14px;font-size:12px;font-family:'DM Sans',sans-serif;border:none;cursor:pointer}
@@ -70,6 +70,12 @@
 .about-annotation{font-family:'Caveat',cursive;font-size:22px;color:#777;margin-top:10px;transform:rotate(-2deg);display:block}
 .about-text{font-size:14px;color:#aaa;line-height:1.85;border-left:2px solid #F2C14E;padding-left:20px}
 .about-text strong{color:#F4EFE4;font-weight:500}
+.edu-block{margin-top:18px;padding-top:14px;border-top:0.5px dashed #444}
+.edu-title{font-family:'Caveat',cursive;font-size:18px;color:#F2C14E;display:block;margin-bottom:8px;transform:rotate(-1deg)}
+.edu-item{margin-bottom:10px}
+.edu-item:last-child{margin-bottom:0}
+.edu-school{color:#F4EFE4;font-weight:500}
+.edu-meta{color:#888;font-size:12px;display:block;margin-top:2px}
 .sec-eyebrow{font-family:'Caveat',cursive;font-size:22px;color:#999;margin-bottom:4px;display:block}
 .sec-eyebrow-light{font-family:'Caveat',cursive;font-size:22px;color:#888;margin-bottom:4px;display:block}
 .sec-kicker{font-family:'Playfair Display',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:#555;margin-bottom:32px}
@@ -100,12 +106,12 @@
 .proj-entry:first-child{border-top:none;padding-top:0}
 .proj-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#e8e0d0;line-height:1}
 .proj-label{font-family:'Caveat',cursive;font-size:15px;color:#aaa;display:block;margin-top:2px}
-.proj-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#1C1C1C;margin-bottom:8px;line-height:1.1}
+.proj-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#1C1C1C;margin-bottom:8px;line-height:1.1;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
 .proj-finding{font-family:'Caveat',cursive;font-size:15px;color:#1C1C1C;background:#F2C14E;display:inline-block;padding:4px 12px;margin-bottom:12px;transform:rotate(-1deg)}
 .proj-desc{font-size:13px;color:#666;line-height:1.7;margin-bottom:14px}
 .proj-tags{display:flex;gap:6px;flex-wrap:wrap}
 .ptag{font-size:11px;color:#1C1C1C;border:0.5px solid #b0a898;padding:3px 10px}
-.proj-annotation{font-family:'Caveat',cursive;font-size:16px;color:#bbb;position:absolute;right:0;top:32px;transform:rotate(3deg)}
+.proj-annotation{font-family:'Caveat',cursive;font-size:16px;color:#999;transform:rotate(1deg);display:inline-block}
 
 .dashboard-sec{background:#1C1C1C;padding:52px 48px;position:relative;z-index:1}
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
@@ -114,6 +120,7 @@
 .dash-media{height:160px;background:#2a2a2a;display:block;border-bottom:0.5px solid #333;overflow:hidden;text-decoration:none}
 .dash-media img,.dash-media video{width:100%;height:100%;object-fit:cover;display:block}
 .dash-media video{background:#111}
+.dash-media iframe{width:100%;height:100%;border:0;display:block;pointer-events:none;background:#111}
 .dash-icon{width:32px;height:32px;border:1px dashed #444;border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:8px}
 .dash-icon-line{width:16px;height:2px;background:#555;display:block}
 .dash-placeholder-label{font-family:'Caveat',cursive;font-size:13px;color:#555;text-align:center;line-height:1.5}
@@ -194,7 +201,7 @@
     <a href="#beyond">beyond the data</a>
     <a href="#contact">contact</a>
   </div>
-  <span class="nav-note">not a resume — A spotify wrapped up of my life</span>
+  <span class="nav-note">not a resume — Years of hardwork in a html</span>
 </div>
 
 <div class="sec hero" id="hero">
@@ -229,17 +236,17 @@
           <a class="myself-polaroid" href="/api/assets/personal/myself.jpg" target="_blank" rel="noreferrer" data-polaroid>
             <div class="myself-tape"></div>
             <div class="myself-photo"><img src="/api/assets/personal/myself.jpg" alt="Varshitha portrait 1" loading="lazy"></div>
-            <div class="myself-cap"><span>myself.jpg</span><span>Life when I was sane</span></div>
+            <div class="myself-cap"><span>Life when I was sane</span></div>
           </a>
           <a class="myself-polaroid" href="/api/assets/personal/myself2.jpeg" target="_blank" rel="noreferrer" data-polaroid>
             <div class="myself-tape" style="background:#B8CDE8;transform:translateX(-50%) rotate(2deg)"></div>
             <div class="myself-photo"><img src="/api/assets/personal/myself2.jpeg" alt="Varshitha portrait 2" loading="lazy"></div>
-            <div class="myself-cap"><span>myself2.jpeg</span><span>trynna be aesthetic</span></div>
+            <div class="myself-cap"><span>trynna be aesthetic</span></div>
           </a>
           <a class="myself-polaroid" href="/api/assets/personal/myself%203.jpeg" target="_blank" rel="noreferrer" data-polaroid>
             <div class="myself-tape" style="background:#E8795A;opacity:0.65"></div>
             <div class="myself-photo"><img src="/api/assets/personal/myself%203.jpeg" alt="Varshitha portrait 3" loading="lazy"></div>
-            <div class="myself-cap"><span>myself 3.jpeg</span><span>on stage</span></div>
+            <div class="myself-cap"><span>on stage</span></div>
           </a>
         </div>
         <div class="myself-controls">
@@ -266,6 +273,8 @@
       Started with a <strong>BSc in Biotechnology, Genetics and Chemistry</strong> — which means I understand the domain, not just the data.<br><br>
       Now finishing an <strong>MBA in Business Analytics</strong> (Aug 2026). In between I've worked on a live EMS analytics programme, presented findings to <strong>very senior stakeholders</strong>, and built dashboards that actually informed resource decisions.<br><br>
       I don't just run the analysis. I <strong>walk into the room and make it land.</strong> Put me on a mic unannounced and I'll have the audience with me inside 60 seconds.
+
+    
     </div>
   </div>
 </div>
@@ -279,7 +288,7 @@
   <div class="exp-entry">
     <div class="exp-date">Dec 2025<br>— Mar 2026</div>
     <div>
-      <div class="exp-org">Access Healthcare International <span class="exp-annotation">— "I just went through even 7 stages of anger - Phoebe buffay"</span></div>
+      <div class="exp-org">Access Healthcare International <span class="exp-annotation">— Blood, sweat and tears Fr!</span></div>
       <span class="exp-role">Project Consultant (Freelance)</span>
       <div class="exp-client">Client: Govt of Odisha (quality review)</div>
       <ul class="exp-bullets">
@@ -304,6 +313,7 @@
         <li>Evaluated environment configurations and documented runtime and installation risks</li>
         <li>Supported tooling evaluation for analytics pipeline automation</li>
       </ul>
+      <span class="exp-annotation-block">ungodly amount of installation tests</span>
       <div class="exp-tags"><span class="etag">AI Systems</span><span class="etag">Documentation</span><span class="etag">Pipeline Analysis</span></div>
     </div>
   </div>
@@ -327,12 +337,12 @@
       <span class="proj-label">gemma</span>
     </div>
     <div>
-      <div class="proj-title">Marin County (USA) EMS Quality Assessment — GEMMA</div>
+      <div class="proj-title">Marin County (USA) EMS Quality Assessment — GEMMA <span class="proj-annotation">yeah I did that →</span></div>
       <div class="proj-finding">Critical window analysis reveals hours with high risk cases with large delays</div>
-      <div class="proj-desc">End-to-end analytics platform built for an EMS quality review using Marin County (USA) incident data. Processed 108k+ records, built operational dashboards and a React-based interface. Findings were presented to senior stakeholders and used for resource planning decisions.</div>
-      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Power BI</span><span class="ptag">React</span><span class="ptag">FastAPI</span></div>
+      <div class="proj-desc">End-to-end analytics platform built for an EMS quality review using Marin County (USA) incident data. Processed 108k+ records, built operational dashboards and a React-based interface. </div>
+      <div class="proj-tags"><span class="ptag">Python</span><span class="ptag">Excel</span><span class="ptag">React</span><span class="ptag">FastAPI</span></div>
     </div>
-    <span class="proj-annotation">yeah I did that →</span>
+
   </div>
 
   <div class="proj-entry">
@@ -442,20 +452,14 @@
       </div>
       <div class="dash-card">
         <a class="dash-media" href="/api/assets/dashboards/flipkart%20db.pdf" target="_blank" rel="noreferrer">
-          <div class="dash-placeholder">
-            <div class="dash-icon"><span class="dash-icon-line"></span></div>
-            <div class="dash-placeholder-label">Flipkart Database</div>
-          </div>
+          <iframe class="dash-pdf" src="/api/assets/dashboards/flipkart%20db.pdf#page=1&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0" title="Flipkart E-commerce dashboard preview" loading="lazy"></iframe>
         </a>
         <div class="dash-title">Flipkart E-commerce</div>
         <div class="dash-subtitle">Dashboard — sales & analytics</div>
       </div>
       <div class="dash-card">
         <a class="dash-media" href="/api/assets/dashboards/sales%20db.pdf" target="_blank" rel="noreferrer">
-          <div class="dash-placeholder">
-            <div class="dash-icon"><span class="dash-icon-line"></span></div>
-            <div class="dash-placeholder-label">Sales Database</div>
-          </div>
+          <iframe class="dash-pdf" src="/api/assets/dashboards/sales%20db.pdf#page=1&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0" title="Sales analytics dashboard preview" loading="lazy"></iframe>
         </a>
         <div class="dash-title">Sales Analytics</div>
         <div class="dash-subtitle">Dashboard — revenue insights</div>
@@ -549,7 +553,7 @@
       <div class="tl-content">
         <div class="tl-title">Student Council — Loyola Academy</div>
         <span class="tl-role">Documentation Head (Bachelors)</span>
-        <div class="tl-desc">Led all documentation for the student council during undergrad. Structured chaos, basically.</div>
+        <div class="tl-desc">Led all documentation for the student council during undergrad. It taught me my strongest documentation habits: clean notes, structured reports, and writing that people can actually follow.</div>
         <span class="tl-win-badge">award recipient</span>
       </div>
     </div>
@@ -802,7 +806,7 @@
   <div class="contact-closing">available for full-time roles immediately. remote or office doesn't matter, Location: Hyderabad. healthcare analytics, general analytics — yes to all of it. (i reply fast, I promise.)</div>
   <div class="footer-bar">
     <span class="footer-name">sirigiri varshitha — 2026</span>
-    <span class="footer-copy">MBA Business Analytics, Anurag University</span>
+    <span class="footer-copy">BSc Biotechnology/Genetics/Chemistry (2024) â€¢ MBA Business Analytics (2026)</span>
   </div>
 </div>
 
