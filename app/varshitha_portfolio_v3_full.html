@@ -5,11 +5,13 @@
 .grid-bg{position:absolute;inset:0;background-image:linear-gradient(#b0a898 1px,transparent 1px),linear-gradient(90deg,#b0a898 1px,transparent 1px);background-size:32px 32px;opacity:0.13;pointer-events:none;z-index:0}
 .sec{position:relative;z-index:1}
 
-.nav-bar{padding:14px 48px;border-bottom:0.5px solid #d0c8b8;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;background:#F4EFE4}
+.nav-bar{padding:14px 48px;border-bottom:0.5px solid #d0c8b8;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;background:#F4EFE4;gap:20px}
+.nav-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.nav-logo{height:42px;width:auto;display:block;object-fit:contain}
 .nav-badge{font-family:'Caveat',cursive;font-size:13px;background:#F2C14E;color:#5a3e00;padding:4px 14px;transform:rotate(-2deg);display:inline-block}
-.nav-links{display:flex;gap:20px}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
 .nav-links a{font-size:12px;color:#888;text-decoration:none;letter-spacing:0.5px}
-.nav-note{font-family:'Caveat',cursive;font-size:15px;color:#bbb;transform:rotate(-1deg);display:inline-block}
+.nav-note{font-family:'Caveat',cursive;font-size:15px;color:#bbb;transform:rotate(-1deg);display:inline-block;text-align:right}
 
 .hero{padding:52px 48px 56px;position:relative;border-bottom:0.5px solid #d0c8b8;text-align:center}
 .hero-inner{position:relative;display:inline-block;text-align:left;width:100%;max-width:1080px}
@@ -192,7 +194,10 @@
 <div class="grid-bg"></div>
 
 <div class="nav-bar">
-  <span class="nav-badge">portfolio — 2026</span>
+  <div class="nav-brand">
+    <img class="nav-logo" src="/api/assets/components/logo.png" alt="Varshitha portfolio logo" loading="eager">
+    <span class="nav-badge">portfolio — 2026</span>
+  </div>
   <div class="nav-links">
     <a href="#about">about</a>
     <a href="#experience">experience</a>
@@ -284,6 +289,22 @@
 <div class="sec cream-sec" id="experience">
   <span class="sec-eyebrow-light">where I've worked</span>
   <div class="sec-kicker">experience</div>
+
+  <div class="exp-entry">
+    <div class="exp-date">May 2026<br>— Present</div>
+    <div>
+      <div class="exp-org">Discover BioInsights <span class="exp-annotation"> — startup mode, learning a lot</span></div>
+      <span class="exp-role">Clinical Operations &amp; Analytics Intern</span>
+      <ul class="exp-bullets">
+        <li>Supporting an HMIS-style healthcare system and its dashboard for monitoring operational analytics across ER and clinical workflows</li>
+        <li>Contributing to UI/UX restructuring and process-flow improvements aimed at reducing clinician cognitive load</li>
+        <li>Assisting in operational analysis, feature planning, and system organization for a clinician-facing healthcare platform</li>
+        <li>Collaborating across workflow, and technical discussions within a fast-moving startup environment</li>
+      </ul>
+      <span class="exp-annotation-block">cross-functional work, healthcare systems, and something new to learn every day.</span>
+      <div class="exp-tags"><span class="etag">Clinical Operations</span><span class="etag">HMIS</span><span class="etag">UI/UX</span><span class="etag">Workflow Design</span><span class="etag">Operational Analytics</span></div>
+    </div>
+  </div>
 
   <div class="exp-entry">
     <div class="exp-date">Dec 2025<br>— Mar 2026</div>

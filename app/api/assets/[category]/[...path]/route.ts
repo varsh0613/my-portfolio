@@ -3,7 +3,7 @@ import path from "path"
 
 import type { NextRequest } from "next/server"
 
-const allowedCategories = new Set(["certificates", "dashboards", "personal", "designs", "resume"])
+const allowedCategories = new Set(["certificates", "dashboards", "personal", "designs", "resume", "components"])
 
 function getMimeType(filePath: string) {
   const ext = path.extname(filePath).toLowerCase()

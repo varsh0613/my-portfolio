@@ -142,6 +142,14 @@ const yearGroups: YearGroup[] = [
     nodeType: "future",
     events: [
       {
+        monthLabel: "May 2026 â€” Present",
+        title: "Discover BioInsights â€” Clinical Operations & Analytics Intern",
+        description:
+          "Cross-functional startup work on an HMIS-style healthcare system with an operational analytics dashboard, covering ER and clinical workflows, UI/UX restructuring, and system organization.",
+        tags: ["Discover BioInsights", "HMIS", "Clinical Operations", "Operational Analytics", "UI/UX"],
+        type: "experience",
+      },
+      {
         monthLabel: "2026",
         title: "CATALYST — clinical AI pipeline (in progress)",
         description:
