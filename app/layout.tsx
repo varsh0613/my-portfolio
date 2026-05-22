@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   title: "Sirigiri Varshitha — Portfolio",
   description: "One-page portfolio",
   icons: {
-    icon: "/api/assets/components/logo.png",
-    shortcut: "/api/assets/components/logo.png",
-    apple: "/api/assets/components/logo.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 }
 
